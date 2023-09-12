@@ -3,19 +3,19 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { HomeComponent } from './home/home.component';
-import { CaptchaComponent } from './captcha/captcha.component';
-import { ResultComponent } from './result/result.component';
 import { FooterComponent } from './footer/footer.component';
+import { HomeComponent } from './home/home.component';
+import { ResultComponent } from './result/result.component';
+import { CaptchaComponent } from './captcha/captcha.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    FooterComponent,
     HomeComponent,
-    CaptchaComponent,
     ResultComponent,
-    FooterComponent
+    CaptchaComponent
   ],
   imports: [
     BrowserModule
