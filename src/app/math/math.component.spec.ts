@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CaptchaComponent } from './captcha.component';
+import { MathComponent } from './math.component';
 
-describe('CaptchaComponent', () => {
-  let component: CaptchaComponent;
-  let fixture: ComponentFixture<CaptchaComponent>;
+describe('MathComponent', () => {
+  let component: MathComponent;
+  let fixture: ComponentFixture<MathComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CaptchaComponent]
+      declarations: [MathComponent]
     });
-    fixture = TestBed.createComponent(CaptchaComponent);
+    fixture = TestBed.createComponent(MathComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

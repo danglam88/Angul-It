@@ -1,0 +1,14 @@
+<div class="main-body">
+    <h3>Level 1: <span>MATH</span></h3>
+    <p>What is the result of the following arithmetic expression (rounded down to greatest integer)?</p>
+    <span>{{ firstNumber + ' ' + operator + ' ' + secondNumber + ' = ???' }}</span>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Type your numeric answer here..." aria-label="User's Answer" aria-describedby="button-addon2" [disabled]="answered" [(ngModel)]="userAnswer">
+        <button class="btn btn-secondary" type="button" id="button-addon2" (click)="checkAnswer()">Submit</button>
+    </div>
+    <p>Your Answer: <span>{{ userAnswer }}</span></p>
+    <p [hidden]="!answered">Expected Result: <span>{{ expectedResult }}</span></p>
+    <p [hidden]="!answered" [style]="result ? 'color: green;' : 'color: red;'">{{ resultText }}</p>
+    <button type="button" class="btn btn-primary" [hidden]="!answered || result">Restart</button>
+    <button type="button" class="btn btn-primary" [hidden]="!answered || !result">Continue</button>
+</div>
