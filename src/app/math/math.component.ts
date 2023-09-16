@@ -15,7 +15,7 @@ export class MathComponent {
   operator: string = this.operators[Math.floor(Math.random() * this.operators.length)];
 
   // Calculate the expected result
-  expectedResult: string = Math.floor(eval(this.firstNumber + this.operator + this.secondNumber)).toString();
+  expectedResult: string = eval(this.firstNumber + this.operator + this.secondNumber).toFixed(0);
 
   // Initialize the answer from the user
   userAnswer: string = '';
