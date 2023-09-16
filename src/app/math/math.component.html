@@ -1,14 +1,16 @@
 <div class="main-body">
     <h3>Level 1: <span>MATH</span></h3>
-    <p>What is the result of the following arithmetic expression (rounded to nearest integer)?</p>
+    <p>What is the result of the following arithmetic expression?</p>
     <span>{{ firstNumber + ' ' + operator + ' ' + secondNumber + ' = ???' }}</span>
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Type your numeric answer here..." aria-label="User's Answer" aria-describedby="button-addon2" [disabled]="answered" [(ngModel)]="userAnswer">
-        <button class="btn btn-secondary" type="button" id="button-addon2" [disabled]="answered" (click)="checkAnswer()">Submit</button>
+    <div class="input-group mb-3 input-answer">
+        <input type="text" class="form-control" placeholder="Type your numeric answer here (rounded to nearest integer)..." aria-label="User's Answer" aria-describedby="button-addon2" [disabled]="answered" [(ngModel)]="userAnswer">
+        <button [ngClass]="{'btn': true, 'btn-submit': userAnswer && !answered, 'btn-disabled': !userAnswer || answered}" type="button" id="button-addon2" [disabled]="!userAnswer || answered" (click)="checkAnswer()">Submit</button>
     </div>
-    <p>Your Answer: <span>{{ userAnswer }}</span></p>
+    <p *ngIf="userAnswer">Your Answer: <span>{{ userAnswer }}</span></p>
     <p *ngIf="answered">Expected Result: <span>{{ expectedResult }}</span></p>
-    <p *ngIf="answered" [style]="result ? 'color: green;' : 'color: red;'">{{ resultText }}</p>
-    <button type="button" class="btn btn-primary" *ngIf="answered && !result">Restart</button>
-    <button type="button" class="btn btn-primary" *ngIf="answered && result">Continue</button>
+    <p *ngIf="answered" [ngStyle]="{color: result ? 'green' : 'red'}">{{ resultText }}</p>
+    <div *ngIf="answered">
+        <button type="button" class="btn btn-primary" *ngIf="!result">Restart</button>
+        <button type="button" class="btn btn-primary" *ngIf="result">Continue</button>
+    </div>
 </div>
