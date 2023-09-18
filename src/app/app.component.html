@@ -1,3 +1,5 @@
 <app-header></app-header>
-<math></math>
+<home *ngIf="start === 'false'" (startEvent)="setStart($event)"></home>
+<captcha *ngIf="start === 'true' && end === 'false'"></captcha>
+<result *ngIf="end === 'true'"></result>
 <app-footer></app-footer>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'math',
@@ -20,22 +20,36 @@ export class MathComponent {
   // Initialize the answer from the user
   userAnswer: string = '';
 
-  // Initialize the status of the answer
+  // Mark that the user has not answered yet initially
   answered: boolean = false;
 
-  // Initialize the status of the result
+  // Mark that the user has answered incorrectly initially
   result: boolean = false;
 
-  // Initialize the result text
+  // Initialize the result text (which is shown after the user answers)
   resultText: string = '';
 
+  // Create a custom level event and bind it to the captcha component
+  @Output()
+  levelEvent: EventEmitter<string> = new EventEmitter<string>();
+
+  // Check the answer from the user
   checkAnswer() {
+    // Mark that the user has answered
     this.answered = true;
+
+    // Check if the user's answer is correct
     if (this.expectedResult === this.userAnswer) {
+      // Mark that the user has answered correctly
       this.result = true;
       this.resultText = 'Correct! You can click Continue button to move to the next challenge.';
     } else {
       this.resultText = 'Wrong! Please try again by clicking Restart button.';
     }
+  }
+
+  emitLevel(event: any) {
+    // Emit the level to the captcha component
+    this.levelEvent.emit(event.target.value);
   }
 }

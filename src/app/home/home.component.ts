@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'home',
@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  // Create a custom start event and bind it to the app component
+  @Output()
+  startEvent: EventEmitter<string> = new EventEmitter<string>();
 
+  emitStart(event: any) {
+    // Emit the start to the app component
+    this.startEvent.emit(event.target.value);
+  }
 }

@@ -7,7 +7,10 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { ResultComponent } from './result/result.component';
-import { MathComponent } from './math/math.component';
+import { MathComponent } from './captcha/math/math.component';
+import { CaptchaComponent } from './captcha/captcha.component';
+import { TextComponent } from './captcha/text/text.component';
+import { ImageComponent } from './captcha/image/image.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { MathComponent } from './math/math.component';
     FooterComponent,
     HomeComponent,
     ResultComponent,
-    MathComponent
+    MathComponent,
+    CaptchaComponent,
+    TextComponent,
+    ImageComponent
   ],
   imports: [
     BrowserModule,
