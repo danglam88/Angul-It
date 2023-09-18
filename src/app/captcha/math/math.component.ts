@@ -27,11 +27,24 @@ export class MathComponent {
   result: boolean = false;
 
   // Initialize the result text (which is shown after the user answers)
-  resultText: string = '';
+  resultText: string = 'Wrong! Please try again by clicking Restart button.';
 
   // Create a custom level event and bind it to the captcha component
   @Output()
   levelEvent: EventEmitter<string> = new EventEmitter<string>();
+
+  // Regenerate the arithmetic expression
+  regenerateExpression() {
+    // Regenerate 2 random numbers between 1 and 100
+    this.firstNumber = Math.floor(Math.random() * 100) + 1;
+    this.secondNumber = Math.floor(Math.random() * 100) + 1;
+
+    // Regenerate a random operator among +, -, *, /
+    this.operator = this.operators[Math.floor(Math.random() * this.operators.length)];
+
+    // Recalculate the expected result
+    this.expectedResult = eval(this.firstNumber + this.operator + this.secondNumber).toFixed(0);
+  }
 
   // Check the answer from the user
   checkAnswer() {
@@ -43,8 +56,6 @@ export class MathComponent {
       // Mark that the user has answered correctly
       this.result = true;
       this.resultText = 'Correct! You can click Continue button to move to the next challenge.';
-    } else {
-      this.resultText = 'Wrong! Please try again by clicking Restart button.';
     }
   }
 
