@@ -1,0 +1,24 @@
+span {
+    font-size: 40px;
+}
+
+.input-answer {
+    margin: 20px 0;
+}
+
+.btn-submit {
+    padding: 12px 30px;
+    background-color: #369;
+    color: #fff;
+}
+
+.btn-disabled {
+    padding: 12px 30px;
+    background-color: #aaa;
+    color: #777;
+}
+
+.regen {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
