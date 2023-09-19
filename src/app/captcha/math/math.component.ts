@@ -147,7 +147,7 @@ export class MathComponent {
   }
 
   emitLevel(event: any) {
-    // If the user clicks the Restart button, regenerate the arithmetic expression
+    // If the user clicks Try Again button, regenerate the arithmetic expression
     if (event.target.value === '1') {
       this.regenerateExpression();
       this.userAnswer = '';

@@ -9,7 +9,7 @@ export class TextComponent implements OnInit {
   // Declare a list of all the allowed characters
   characters: string = 'ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789';
 
-  // Generate a text that contains 6 random characters from the list of allowed characters
+  // Initialize a text that contains 6 random characters from the list of allowed characters
   expectedResult: string = this.generateRandomText(6);
 
   // Initialize the answer from the user
@@ -90,7 +90,7 @@ export class TextComponent implements OnInit {
     this.formatText(this.expectedResult);
   }
 
-  // Generate a text that contains 'length' random characters from the list of allowed characters
+  // Generate a random text that contains 'length' random characters
   generateRandomText(length: number) {
     let text = '';
     for (let i = 0; i < length; i++) {
@@ -113,7 +113,7 @@ export class TextComponent implements OnInit {
   }
 
   emitLevel(event: any) {
-    // If the user clicks the Restart button, regenerate the text
+    // If the user clicks Try Again button, regenerate the random text
     if (event.target.value === '2') {
       this.regenerateCharacters();
       this.userAnswer = '';

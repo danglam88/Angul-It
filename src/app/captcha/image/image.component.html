@@ -1,1 +1,21 @@
-<p>image works!</p>
+<div class="main-body">
+    <h3>Level 3: <span>IMAGE</span></h3>
+    <p>Choose all the pictures that involve cats!</p>
+    <div id="image-container"></div>
+    <button [ngClass]="{'regen': true, 'btn': true, 'btn-submit': !answered, 'btn-disabled': answered}" type="button" [disabled]="answered" (click)="regenerateCatImages()">Regenerate</button>
+    <div class="input-group mb-3 input-answer">
+        <input type="text" class="form-control" placeholder="Type the alphanumerical characters here..." aria-label="User's Answer" aria-describedby="button-addon2" [disabled]="answered" [(ngModel)]="userAnswer">
+        <button [ngClass]="{'btn': true, 'btn-submit': userAnswer && !answered, 'btn-disabled': !userAnswer || answered}" type="button" id="button-addon2" [disabled]="!userAnswer || answered" (click)="checkAnswer()">Submit</button>
+    </div>
+    <p [ngStyle]="{opacity: userAnswer ? '1' : '0'}">Your Answer: <span>{{ userAnswer }}</span></p>
+    <p [ngStyle]="{opacity: answered ? '1' : '0'}">Expected Result: <span>{{ expectedResult }}</span></p>
+    <p [ngStyle]="{opacity: answered ? '1' : '0', color: result ? 'green' : 'red'}">{{ resultText }}
+        <span *ngIf="!answered">
+            <button type="button" class="btn btn-primary" [style.opacity]="0">Style Holder</button>
+        </span>
+        <span *ngIf="answered">
+            <button type="button" class="btn btn-primary btn-level" value="3" *ngIf="!result" (click)="emitLevel($event)">Try Again</button>
+            <button type="button" class="btn btn-primary btn-level" value="success" *ngIf="result" (click)="emitLevel($event)">Verify</button>
+        </span>
+    </p>
+</div>
