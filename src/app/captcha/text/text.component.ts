@@ -9,8 +9,8 @@ export class TextComponent implements OnInit {
   // Declare a list of all the allowed characters
   characters: string = 'ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789';
 
-  // Generate a text that contains 8 random characters from the list of allowed characters
-  expectedResult: string = this.generateRandomText(8);
+  // Generate a text that contains 6 random characters from the list of allowed characters
+  expectedResult: string = this.generateRandomText(6);
 
   // Initialize the answer from the user
   userAnswer: string = '';
@@ -84,9 +84,9 @@ export class TextComponent implements OnInit {
     this.formatText(this.expectedResult);
   }
 
-  // Regenerate a text that contains 8 random characters from the list of allowed characters
+  // Regenerate a text that contains 6 random characters from the list of allowed characters
   regenerateCharacters() {
-    this.expectedResult = this.generateRandomText(8);
+    this.expectedResult = this.generateRandomText(6);
     this.formatText(this.expectedResult);
   }
 
