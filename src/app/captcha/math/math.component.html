@@ -9,12 +9,13 @@
     </div>
     <p [ngStyle]="{opacity: userAnswer ? '1' : '0'}">Your Answer: <span>{{ userAnswer }}</span></p>
     <p [ngStyle]="{opacity: answered ? '1' : '0'}">Expected Result: <span>{{ expectedResult }}</span></p>
-    <p [ngStyle]="{opacity: answered ? '1' : '0', color: result ? 'green' : 'red'}">{{ resultText }}</p>
-    <div *ngIf="!answered">
-        <button type="button" class="btn btn-primary" [style.opacity]="0">Style Holder</button>
-    </div>
-    <div *ngIf="answered">
-        <button type="button" class="btn btn-primary" value="1" *ngIf="!result" (click)="emitLevel($event)">Restart</button>
-        <button type="button" class="btn btn-primary" value="2" *ngIf="result" (click)="emitLevel($event)">Continue</button>
-    </div>
+    <p [ngStyle]="{opacity: answered ? '1' : '0', color: result ? 'green' : 'red'}">{{ resultText }}
+        <span *ngIf="!answered">
+            <button type="button" class="btn btn-primary" [style.opacity]="0">Style Holder</button>
+        </span>
+        <span *ngIf="answered">
+            <button type="button" class="btn btn-primary btn-level" value="1" *ngIf="!result" (click)="emitLevel($event)">Try Again</button>
+            <button type="button" class="btn btn-primary btn-level" value="2" *ngIf="result" (click)="emitLevel($event)">Move On</button>
+        </span>
+    </p>
 </div>

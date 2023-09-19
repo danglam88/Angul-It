@@ -30,7 +30,7 @@ export class MathComponent {
   result: boolean = false;
 
   // Initialize the result text (which is shown after the user answers)
-  resultText: string = 'Wrong! Please try again by clicking Restart button.';
+  resultText: string = 'Wrong! Please try again!';
 
   // Create a custom level event and bind it to the captcha component
   @Output()
@@ -142,7 +142,7 @@ export class MathComponent {
     if (this.expectedResult === this.userAnswer) {
       // Mark that the user has answered correctly
       this.result = true;
-      this.resultText = 'Correct! You can click Continue button to move to the next challenge.';
+      this.resultText = 'Correct! Let\'s move on!';
     }
   }
 
@@ -153,7 +153,7 @@ export class MathComponent {
       this.userAnswer = '';
       this.answered = false;
       this.result = false;
-      this.resultText = 'Wrong! Please try again by clicking Restart button.';
+      this.resultText = 'Wrong! Please try again!';
     }
     // Emit the level to the captcha component
     this.levelEvent.emit(event.target.value);
