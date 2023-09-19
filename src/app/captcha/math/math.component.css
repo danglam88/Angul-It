@@ -6,6 +6,12 @@ span {
     margin: 20px 0;
 }
 
+.btn-regen {
+    padding: 12px 30px;
+    background-color: #006400;
+    color: #fff;
+}
+
 .btn-submit {
     padding: 12px 30px;
     background-color: #369;

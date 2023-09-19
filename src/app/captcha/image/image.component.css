@@ -4,6 +4,15 @@ span {
 
 .input-answer {
     margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-regen {
+    padding: 12px 30px;
+    background-color: #006400;
+    color: #fff;
 }
 
 .btn-submit {
@@ -25,4 +34,8 @@ span {
 
 .btn-level {
     margin-left: 10px;
+}
+
+#image-container {
+    height: 320px;
 }

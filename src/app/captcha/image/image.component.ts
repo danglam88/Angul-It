@@ -1,5 +1,11 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 
+// Define the cell interface as an object with two properties: row and col
+interface cell {
+  row: number;
+  col: number;
+}
+
 @Component({
   selector: 'image',
   templateUrl: './image.component.html',
@@ -7,10 +13,10 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 })
 export class ImageComponent implements OnInit {
   // Initialize the expected result
-  expectedResult: number[] = [];
+  expectedResult: cell[] = [];
 
   // Initialize the answer from the user
-  userAnswer: number[] = [];
+  userAnswer: cell[] = [];
 
   // Mark that the user has not answered yet initially
   answered: boolean = false;
@@ -27,8 +33,6 @@ export class ImageComponent implements OnInit {
 
   // Generate a random cat image and return the correct answer
   generateRandomCatImage() {
-    const correctAnswer: number[] = [];
-
     // Get a random cat image among 8 images
     const randomCatNumber = Math.floor(Math.random() * 8) + 1;
 
@@ -70,7 +74,8 @@ export class ImageComponent implements OnInit {
           td.style.height = `${squareSize.height}px`;
           td.style.padding = '0';
           td.style.display = 'inline-block';
-          td.style.margin = '2px';
+          td.style.margin = '5px';
+          td.style.cursor = 'pointer';
 
           const canvas = document.createElement('canvas');
           canvas.width = squareSize.width;
@@ -93,6 +98,22 @@ export class ImageComponent implements OnInit {
 
           td.appendChild(canvas);
           tr.appendChild(td);
+
+          td.addEventListener('click', () => {
+            if (!td.classList.contains('bling-bling')) {
+              td.classList.add('bling-bling');
+              td.style.transform = 'scale(1.2)';
+              td.style.transition = 'all 0.3s ease-in-out';
+              td.style.border = '2px solid red';
+              this.userAnswer.push({ row, col });
+            } else {
+              td.classList.remove('bling-bling');
+              td.style.transform = 'scale(1)';
+              td.style.transition = 'all 0.3s ease-in-out';
+              td.style.border = 'none';
+              this.userAnswer = this.userAnswer.filter(cell => cell.row !== row || cell.col !== col);
+            }
+          });
         }
         table.appendChild(tr);
       }
@@ -104,6 +125,209 @@ export class ImageComponent implements OnInit {
       }
     };
     
+    return this.getCorrectAnswer(randomCatNumber);
+  }
+
+  // Get the correct answer based on the random cat image
+  getCorrectAnswer(randomCatNumber: number) {
+    const correctAnswer: cell[] = [];
+
+    switch (randomCatNumber) {
+      case 1:
+        correctAnswer.push({ row: 0, col: 1 });
+        correctAnswer.push({ row: 0, col: 2 });
+        correctAnswer.push({ row: 0, col: 3 });
+        correctAnswer.push({ row: 0, col: 4 });
+        correctAnswer.push({ row: 1, col: 1 });
+        correctAnswer.push({ row: 1, col: 2 });
+        correctAnswer.push({ row: 1, col: 3 });
+        correctAnswer.push({ row: 1, col: 4 });
+        correctAnswer.push({ row: 1, col: 5 });
+        correctAnswer.push({ row: 2, col: 1 });
+        correctAnswer.push({ row: 2, col: 2 });
+        correctAnswer.push({ row: 2, col: 3 });
+        correctAnswer.push({ row: 2, col: 4 });
+        correctAnswer.push({ row: 3, col: 0 });
+        correctAnswer.push({ row: 3, col: 1 });
+        correctAnswer.push({ row: 3, col: 2 });
+        correctAnswer.push({ row: 3, col: 3 });
+        correctAnswer.push({ row: 3, col: 4 });
+        correctAnswer.push({ row: 3, col: 5 });
+        correctAnswer.push({ row: 4, col: 1 });
+        correctAnswer.push({ row: 4, col: 2 });
+        correctAnswer.push({ row: 4, col: 3 });
+        correctAnswer.push({ row: 4, col: 4 });
+        correctAnswer.push({ row: 5, col: 0 });
+        correctAnswer.push({ row: 5, col: 1 });
+        correctAnswer.push({ row: 5, col: 2 });
+        correctAnswer.push({ row: 5, col: 3 });
+        correctAnswer.push({ row: 5, col: 4 });
+        break;
+      case 2:
+        correctAnswer.push({ row: 0, col: 0 });
+        correctAnswer.push({ row: 0, col: 1 });
+        correctAnswer.push({ row: 1, col: 0 });
+        correctAnswer.push({ row: 1, col: 1 });
+        correctAnswer.push({ row: 1, col: 2 });
+        correctAnswer.push({ row: 1, col: 3 });
+        correctAnswer.push({ row: 1, col: 4 });
+        correctAnswer.push({ row: 1, col: 5 });
+        correctAnswer.push({ row: 2, col: 0 });
+        correctAnswer.push({ row: 2, col: 1 });
+        correctAnswer.push({ row: 2, col: 2 });
+        correctAnswer.push({ row: 2, col: 3 });
+        correctAnswer.push({ row: 2, col: 4 });
+        correctAnswer.push({ row: 2, col: 5 });
+        correctAnswer.push({ row: 3, col: 0 });
+        correctAnswer.push({ row: 3, col: 1 });
+        correctAnswer.push({ row: 3, col: 2 });
+        correctAnswer.push({ row: 3, col: 3 });
+        correctAnswer.push({ row: 3, col: 4 });
+        correctAnswer.push({ row: 3, col: 5 });
+        correctAnswer.push({ row: 4, col: 0 });
+        correctAnswer.push({ row: 4, col: 1 });
+        correctAnswer.push({ row: 4, col: 2 });
+        correctAnswer.push({ row: 4, col: 3 });
+        correctAnswer.push({ row: 4, col: 4 });
+        correctAnswer.push({ row: 5, col: 2 });
+        correctAnswer.push({ row: 5, col: 3 });
+        correctAnswer.push({ row: 5, col: 4 });
+        break;
+      case 3:
+        correctAnswer.push({ row: 1, col: 1 });
+        correctAnswer.push({ row: 1, col: 2 });
+        correctAnswer.push({ row: 1, col: 3 });
+        correctAnswer.push({ row: 1, col: 4 });
+        correctAnswer.push({ row: 1, col: 5 });
+        correctAnswer.push({ row: 2, col: 1 });
+        correctAnswer.push({ row: 2, col: 2 });
+        correctAnswer.push({ row: 2, col: 3 });
+        correctAnswer.push({ row: 2, col: 4 });
+        correctAnswer.push({ row: 2, col: 5 });
+        correctAnswer.push({ row: 3, col: 0 });
+        correctAnswer.push({ row: 3, col: 1 });
+        correctAnswer.push({ row: 3, col: 2 });
+        correctAnswer.push({ row: 3, col: 3 });
+        correctAnswer.push({ row: 3, col: 4 });
+        correctAnswer.push({ row: 3, col: 5 });
+        correctAnswer.push({ row: 4, col: 0 });
+        correctAnswer.push({ row: 4, col: 1 });
+        correctAnswer.push({ row: 4, col: 2 });
+        correctAnswer.push({ row: 4, col: 3 });
+        correctAnswer.push({ row: 4, col: 4 });
+        break;
+      case 4:
+        correctAnswer.push({ row: 1, col: 1 });
+        correctAnswer.push({ row: 1, col: 2 });
+        correctAnswer.push({ row: 1, col: 3 });
+        correctAnswer.push({ row: 1, col: 4 });
+        correctAnswer.push({ row: 2, col: 1 });
+        correctAnswer.push({ row: 2, col: 2 });
+        correctAnswer.push({ row: 2, col: 3 });
+        correctAnswer.push({ row: 2, col: 4 });
+        correctAnswer.push({ row: 3, col: 1 });
+        correctAnswer.push({ row: 3, col: 2 });
+        correctAnswer.push({ row: 3, col: 3 });
+        correctAnswer.push({ row: 3, col: 4 });
+        correctAnswer.push({ row: 4, col: 1 });
+        correctAnswer.push({ row: 4, col: 2 });
+        correctAnswer.push({ row: 4, col: 3 });
+        correctAnswer.push({ row: 4, col: 4 });
+        correctAnswer.push({ row: 5, col: 1 });
+        correctAnswer.push({ row: 5, col: 2 });
+        correctAnswer.push({ row: 5, col: 3 });
+        correctAnswer.push({ row: 5, col: 4 });
+        break;
+      case 5:
+        correctAnswer.push({ row: 0, col: 1 });
+        correctAnswer.push({ row: 0, col: 3 });
+        correctAnswer.push({ row: 1, col: 1 });
+        correctAnswer.push({ row: 1, col: 2 });
+        correctAnswer.push({ row: 1, col: 3 });
+        correctAnswer.push({ row: 1, col: 4 });
+        correctAnswer.push({ row: 2, col: 1 });
+        correctAnswer.push({ row: 2, col: 2 });
+        correctAnswer.push({ row: 2, col: 3 });
+        correctAnswer.push({ row: 2, col: 4 });
+        correctAnswer.push({ row: 2, col: 5 });
+        correctAnswer.push({ row: 3, col: 1 });
+        correctAnswer.push({ row: 3, col: 2 });
+        correctAnswer.push({ row: 3, col: 3 });
+        correctAnswer.push({ row: 3, col: 4 });
+        correctAnswer.push({ row: 3, col: 5 });
+        correctAnswer.push({ row: 4, col: 1 });
+        correctAnswer.push({ row: 4, col: 2 });
+        correctAnswer.push({ row: 4, col: 3 });
+        correctAnswer.push({ row: 4, col: 4 });
+        correctAnswer.push({ row: 4, col: 5 });
+        correctAnswer.push({ row: 5, col: 1 });
+        correctAnswer.push({ row: 5, col: 2 });
+        correctAnswer.push({ row: 5, col: 3 });
+        correctAnswer.push({ row: 5, col: 4 });
+        break;
+      case 6:
+        correctAnswer.push({ row: 1, col: 2 });
+        correctAnswer.push({ row: 1, col: 3 });
+        correctAnswer.push({ row: 2, col: 1 });
+        correctAnswer.push({ row: 2, col: 2 });
+        correctAnswer.push({ row: 2, col: 3 });
+        correctAnswer.push({ row: 2, col: 4 });
+        correctAnswer.push({ row: 3, col: 1 });
+        correctAnswer.push({ row: 3, col: 2 });
+        correctAnswer.push({ row: 3, col: 3 });
+        correctAnswer.push({ row: 3, col: 4 });
+        correctAnswer.push({ row: 4, col: 1 });
+        correctAnswer.push({ row: 4, col: 2 });
+        correctAnswer.push({ row: 4, col: 3 });
+        correctAnswer.push({ row: 4, col: 4 });
+        break;
+      case 7:
+        correctAnswer.push({ row: 0, col: 2 });
+        correctAnswer.push({ row: 1, col: 2 });
+        correctAnswer.push({ row: 1, col: 3 });
+        correctAnswer.push({ row: 1, col: 4 });
+        correctAnswer.push({ row: 1, col: 5 });
+        correctAnswer.push({ row: 2, col: 1 });
+        correctAnswer.push({ row: 2, col: 2 });
+        correctAnswer.push({ row: 2, col: 3 });
+        correctAnswer.push({ row: 2, col: 4 });
+        correctAnswer.push({ row: 2, col: 5 });
+        correctAnswer.push({ row: 3, col: 0 });
+        correctAnswer.push({ row: 3, col: 1 });
+        correctAnswer.push({ row: 3, col: 2 });
+        correctAnswer.push({ row: 3, col: 3 });
+        correctAnswer.push({ row: 3, col: 4 });
+        correctAnswer.push({ row: 3, col: 5 });
+        correctAnswer.push({ row: 4, col: 3 });
+        correctAnswer.push({ row: 4, col: 4 });
+        break;
+      case 8:
+        correctAnswer.push({ row: 0, col: 1 });
+        correctAnswer.push({ row: 0, col: 2 });
+        correctAnswer.push({ row: 0, col: 3 });
+        correctAnswer.push({ row: 1, col: 1 });
+        correctAnswer.push({ row: 1, col: 2 });
+        correctAnswer.push({ row: 1, col: 3 });
+        correctAnswer.push({ row: 1, col: 4 });
+        correctAnswer.push({ row: 1, col: 5 });
+        correctAnswer.push({ row: 2, col: 1 });
+        correctAnswer.push({ row: 2, col: 2 });
+        correctAnswer.push({ row: 2, col: 3 });
+        correctAnswer.push({ row: 2, col: 4 });
+        correctAnswer.push({ row: 2, col: 5 });
+        correctAnswer.push({ row: 3, col: 1 });
+        correctAnswer.push({ row: 3, col: 2 });
+        correctAnswer.push({ row: 3, col: 3 });
+        correctAnswer.push({ row: 3, col: 4 });
+        correctAnswer.push({ row: 3, col: 5 });
+        correctAnswer.push({ row: 4, col: 1 });
+        correctAnswer.push({ row: 4, col: 2 });
+        correctAnswer.push({ row: 4, col: 3 });
+        correctAnswer.push({ row: 4, col: 4 });
+        correctAnswer.push({ row: 4, col: 5 });
+        break;
+    }
+
     return correctAnswer;
   }
 
@@ -123,7 +347,9 @@ export class ImageComponent implements OnInit {
     this.answered = true;
 
     // Check if the user's answer is correct
-    if (this.expectedResult === this.userAnswer) {
+    if (this.expectedResult.length === this.userAnswer.length
+      && this.expectedResult.every(expectedItem => this.userAnswer.some(userItem =>
+        userItem.row === expectedItem.row && userItem.col === expectedItem.col))) {
       // Mark that the user has answered correctly
       this.result = true;
       this.resultText = 'Correct! Let\'s now verify!';
