@@ -15,13 +15,6 @@ export class AppComponent {
   // Initialize the end to 'false'
   end: string = 'false';
 
-  // Set the start based on what is emitted from the captcha component
-  setHome(state: string) {
-    if (state === 'home') {
-      this.start = 'false';
-    }
-  }
-
   // Set the start based on what is emitted from the home component
   setStart(state: string) {
     if (state === 'start') {

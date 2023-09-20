@@ -9,10 +9,6 @@ export class CaptchaComponent {
   // Initialize the level to '1'
   level: string = '1';
 
-  // Create a custom home event and bind it to the app component
-  @Output()
-  homeEvent: EventEmitter<string> = new EventEmitter<string>();
-
   // Create a custom result event and bind it to the app component
   @Output()
   resultEvent: EventEmitter<string> = new EventEmitter<string>();
@@ -21,11 +17,8 @@ export class CaptchaComponent {
   setLevel(level: string) {
     this.level = level;
 
-    if (level === 'home') {
-      // Emit the home to the app component
-      this.homeEvent.emit(level);
-    } else if (level === 'result') {
-      // Emit the result to the app component
+    // Emit the result to the app component
+    if (level === 'result') {
       this.resultEvent.emit(level);
     }
   }
