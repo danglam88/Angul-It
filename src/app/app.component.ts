@@ -15,6 +15,13 @@ export class AppComponent {
   // Initialize the end to 'false'
   end: string = 'false';
 
+  // Set the start based on what is emitted from the captcha component
+  setHome(state: string) {
+    if (state === 'home') {
+      this.start = 'false';
+    }
+  }
+
   // Set the start based on what is emitted from the home component
   setStart(state: string) {
     if (state === 'start') {
@@ -23,8 +30,8 @@ export class AppComponent {
   }
 
   // Set the start and the end based on what is emitted from the captcha component
-  setSuccess(state: string) {
-    if (state === 'success') {
+  setResult(state: string) {
+    if (state === 'result') {
       this.start = 'false';
       this.end = 'true';
     }

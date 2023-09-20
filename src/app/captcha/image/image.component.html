@@ -12,7 +12,8 @@
         </span>
         <span *ngIf="answered">
             <button type="button" class="btn btn-primary btn-level" value="3" *ngIf="!result" (click)="emitLevel($event)">Try Again</button>
-            <button type="button" class="btn btn-primary btn-level" value="success" *ngIf="result" (click)="emitLevel($event)">Verify</button>
+            <button type="button" class="btn btn-primary btn-level" value="result" *ngIf="result" (click)="emitLevel($event)">Verify</button>
         </span>
     </p>
+    <button type="button" class="btn btn-dark" value="2" (click)="emitLevel($event)">Back</button>
 </div>
