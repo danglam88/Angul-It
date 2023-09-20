@@ -10,8 +10,8 @@ export class HomeComponent {
   @Output()
   startEvent: EventEmitter<string> = new EventEmitter<string>();
 
+  // Emit the start to the app component
   emitStart(event: any) {
-    // Emit the start to the app component
     this.startEvent.emit(event.target.value);
   }
 }
