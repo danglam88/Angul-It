@@ -16,24 +16,23 @@ export class AppComponent {
   end: string = 'false';
 
   // Set the start based on what is emitted from the home component
-  setStart(start: string) {
-    if (start === 'start') {
+  setStart(state: string) {
+    if (state === 'start') {
       this.start = 'true';
     }
   }
 
   // Set the start and the end based on what is emitted from the captcha component
-  setSuccess(success: string) {
-    if (success === 'success') {
+  setSuccess(state: string) {
+    if (state === 'success') {
       this.start = 'false';
       this.end = 'true';
     }
   }
 
-  // Set the start and the end based on what is emitted from the result component
-  setRestart(restart: string) {
-    if (restart === 'restart') {
-      this.start = 'true';
+  // Set the end based on what is emitted from the result component
+  setRestart(state: string) {
+    if (state === 'restart') {
       this.end = 'false';
     }
   }
