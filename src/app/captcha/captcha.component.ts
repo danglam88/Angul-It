@@ -45,7 +45,7 @@ export class CaptchaComponent implements OnInit {
     this.currentState = { ...this.currentState, ...newState };
 
     // Save the current state to the local storage
-    localStorage.setItem('appState', JSON.stringify(this.currentState));
+    localStorage.setItem('appState', btoa(JSON.stringify(this.currentState)));
   }
 
   // Set the level based on what is emitted from the child component
@@ -61,7 +61,7 @@ export class CaptchaComponent implements OnInit {
       this.currentState = { ...this.currentState, ...newState };
 
       // Save the current state to the local storage
-      localStorage.setItem('appState', JSON.stringify(this.currentState));
+      localStorage.setItem('appState', btoa(JSON.stringify(this.currentState)));
     }
   }
 }

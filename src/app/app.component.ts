@@ -31,12 +31,12 @@ export class AppComponent implements OnInit {
 
     // If there is a saved state in the local storage, use it
     if (savedState) {
-      this.currentState = JSON.parse(savedState);
+      this.currentState = JSON.parse(atob(savedState));
       this.start = this.currentState.start;
       this.end = this.currentState.end;
     } else {
       // If there is no saved state in the local storage, save the current state
-      localStorage.setItem('appState', JSON.stringify(this.currentState));
+      localStorage.setItem('appState', btoa(JSON.stringify(this.currentState)));
     }
   }
 
@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
       this.currentState = { ...this.currentState, ...newState };
 
       // Save the current state to the local storage
-      localStorage.setItem('appState', JSON.stringify(this.currentState));
+      localStorage.setItem('appState', btoa(JSON.stringify(this.currentState)));
     }
   }
 
@@ -65,7 +65,7 @@ export class AppComponent implements OnInit {
       this.currentState = { ...this.currentState, ...newState };
 
       // Save the current state to the local storage
-      localStorage.setItem('appState', JSON.stringify(this.currentState));
+      localStorage.setItem('appState', btoa(JSON.stringify(this.currentState)));
     }
   }
 
@@ -85,7 +85,7 @@ export class AppComponent implements OnInit {
       };
 
       // Save the current state to the local storage
-      localStorage.setItem('appState', JSON.stringify(this.currentState));
+      localStorage.setItem('appState', btoa(JSON.stringify(this.currentState)));
     }
   }
 }
