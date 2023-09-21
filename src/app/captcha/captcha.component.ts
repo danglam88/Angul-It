@@ -18,22 +18,24 @@ export class CaptchaComponent {
   @Output()
   resultEvent: EventEmitter<string> = new EventEmitter<string>();
 
+  // Set the level completion based on what is emitted from the child component
+  setPass(level: string) {
+    if (level === '1') {
+      this.level1Done = true;
+    } else if (level === '2') {
+      this.level2Done = true;
+    } else if (level === '3') {
+      this.level3Done = true;
+    }
+  }
+
   // Set the level based on what is emitted from the child component
   setLevel(level: string) {
     this.level = level;
 
-    // Mark the completion of each level
-    if (level === '2' && !this.level1Done) {
-      this.level1Done = true;
-    } else if (level === '3' && !this.level2Done) {
-      this.level2Done = true;
-    } else if (level === 'result') {
-      // Emit the result to the app component
+    // Emit the result to the app component
+    if (level === 'result') {
       this.resultEvent.emit(level);
-      
-      if (!this.level3Done) {
-        this.level3Done = true;
-      }
     }
   }
 }

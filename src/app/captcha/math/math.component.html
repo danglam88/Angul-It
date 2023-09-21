@@ -1,11 +1,11 @@
 <div class="main-body">
     <h3>Level 1: <span>MATH</span></h3>
-    <p [ngStyle]="{opacity: levelDone? '0' : '1'}">What is the result of the following arithmetic expression?</p>
-    <span [ngStyle]="{opacity: levelDone? '0' : '1'}">{{ textExpression }}</span>
-    <button [ngStyle]="{opacity: levelDone? '0' : '1'}" [ngClass]="{'regen': true, 'btn': true, 'btn-regen': !answered, 'btn-disabled': answered}" type="button" [disabled]="answered" (click)="regenerateExpression()">Regenerate</button>
-    <div [ngStyle]="{opacity: levelDone? '0' : '1'}" class="input-group mb-3 input-answer">
-        <input type="text" class="form-control" placeholder="Type your numeric answer here..." aria-label="User's Answer" aria-describedby="button-addon2" [disabled]="answered" [(ngModel)]="userAnswer">
-        <button [ngClass]="{'btn': true, 'btn-submit': userAnswer && !answered, 'btn-disabled': !userAnswer || answered}" type="button" id="button-addon2" [disabled]="!userAnswer || answered" (click)="checkAnswer()">Submit</button>
+    <p>What is the result of the following arithmetic expression?</p>
+    <span>{{ textExpression }}</span>
+    <button [ngClass]="{'regen': true, 'btn': true, 'btn-regen': !answered && !levelDone, 'btn-disabled': answered || levelDone}" type="button" [disabled]="answered || levelDone" (click)="regenerateExpression()">Regenerate</button>
+    <div class="input-group mb-3 input-answer">
+        <input type="text" class="form-control" placeholder="Type your numeric answer here..." aria-label="User's Answer" aria-describedby="button-addon2" [disabled]="answered || levelDone" [(ngModel)]="userAnswer">
+        <button [ngClass]="{'btn': true, 'btn-submit': userAnswer && !answered && !levelDone, 'btn-disabled': !userAnswer || answered || levelDone}" type="button" id="button-addon2" [disabled]="!userAnswer || answered || levelDone" (click)="checkAnswer()">Submit</button>
     </div>
     <p [ngStyle]="{opacity: userAnswer ? '1' : '0'}">Your Answer: <span>{{ userAnswer }}</span></p>
     <p [ngStyle]="{opacity: answered ? '1' : '0'}">Expected Result: <span>{{ expectedResult }}</span></p>
@@ -20,6 +20,14 @@
         <span *ngIf="levelDone">
             <button type="button" class="btn btn-primary btn-level" value="2" (click)="emitLevel($event)">Move On</button>
             <button type="button" class="btn btn-primary btn-level" value="1" (click)="emitLevel($event)">Try Again, instead</button>
+        </span>
+    </p>
+    <p [ngStyle]="{opacity: movedOn ? '1' : '0', color: movedOn ? 'green' : 'red'}">{{ movedOnText }}
+        <span *ngIf="!movedOn">
+            <button type="button" class="btn btn-primary" [style.opacity]="0">Style Holder</button>
+        </span>
+        <span *ngIf="movedOn">
+            <button type="button" class="btn btn-primary btn-level" value="2" (click)="emitLevel($event)">Move On</button>
         </span>
     </p>
 </div>

@@ -16,6 +16,12 @@ export class ImageComponent implements OnInit {
   @Input()
   levelDone: boolean = false;
 
+  // Initialize the possibility to move on to 'false'
+  movedOn: boolean = false;
+
+  // Initialize the text to be shown when the user is able to move on
+  movedOnText: string = '';
+
   // Initialize the expected result
   expectedResult: cell[] = [];
 
@@ -34,6 +40,10 @@ export class ImageComponent implements OnInit {
   // Create a custom level event and bind it to the captcha component
   @Output()
   levelEvent: EventEmitter<string> = new EventEmitter<string>();
+
+  // Create a custom pass event and bind it to the captcha component
+  @Output()
+  passEvent: EventEmitter<string> = new EventEmitter<string>();
 
   // Generate a random cat image and return the correct answer
   generateRandomCatImage() {
@@ -147,6 +157,7 @@ export class ImageComponent implements OnInit {
         correctAnswer.push({ row: 1, col: 3 });
         correctAnswer.push({ row: 1, col: 4 });
         correctAnswer.push({ row: 1, col: 5 });
+        correctAnswer.push({ row: 2, col: 0 });
         correctAnswer.push({ row: 2, col: 1 });
         correctAnswer.push({ row: 2, col: 2 });
         correctAnswer.push({ row: 2, col: 3 });
@@ -157,6 +168,7 @@ export class ImageComponent implements OnInit {
         correctAnswer.push({ row: 3, col: 3 });
         correctAnswer.push({ row: 3, col: 4 });
         correctAnswer.push({ row: 3, col: 5 });
+        correctAnswer.push({ row: 4, col: 0 });
         correctAnswer.push({ row: 4, col: 1 });
         correctAnswer.push({ row: 4, col: 2 });
         correctAnswer.push({ row: 4, col: 3 });
@@ -364,13 +376,23 @@ export class ImageComponent implements OnInit {
       // Mark that the user has answered correctly
       this.result = true;
       this.resultText = 'Correct! Let\'s now verify!';
+
+      if (!this.movedOn) {
+        // Emit the level completion to the captcha component
+        this.passEvent.emit('3');
+      }
     }
   }
 
   emitLevel(event: any) {
     // If the user clicks Try Again button, regenerate the cat images
     if (event.target.value === '3') {
-      this.levelDone = false;
+      // If the user has already passed the level, show the move-on text
+      if (this.levelDone) {
+        this.levelDone = false;
+        this.movedOn = true;
+        this.movedOnText = 'You can verify at any time!'
+      }
       this.regenerateCatImages();
       this.userAnswer = [];
       this.answered = false;

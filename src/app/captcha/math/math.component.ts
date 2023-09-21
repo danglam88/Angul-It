@@ -10,6 +10,12 @@ export class MathComponent implements OnInit {
   @Input()
   levelDone: boolean = false;
 
+  // Initialize the possibility to move on to 'false'
+  movedOn: boolean = false;
+
+  // Initialize the text to be shown when the user is able to move on
+  movedOnText: string = '';
+
   // Generate 2 random numbers between 1 and 10
   firstNumber: number = Math.floor(Math.random() * 10) + 1;
   secondNumber: number = Math.floor(Math.random() * 10) + 1;
@@ -39,6 +45,10 @@ export class MathComponent implements OnInit {
   // Create a custom level event and bind it to the captcha component
   @Output()
   levelEvent: EventEmitter<string> = new EventEmitter<string>();
+
+  // Create a custom pass event and bind it to the captcha component
+  @Output()
+  passEvent: EventEmitter<string> = new EventEmitter<string>();
 
   // Generate the text format of the arithmetic expression
   generateTextExpression() {
@@ -154,13 +164,23 @@ export class MathComponent implements OnInit {
       // Mark that the user has answered correctly
       this.result = true;
       this.resultText = 'Correct! Let\'s move on!';
+
+      if (!this.movedOn) {
+        // Emit the level completion to the captcha component
+        this.passEvent.emit('1');
+      }
     }
   }
 
   emitLevel(event: any) {
     // If the user clicks Try Again button, regenerate the arithmetic expression
     if (event.target.value === '1') {
-      this.levelDone = false;
+      // If the user has already passed the level, show the move-on text
+      if (this.levelDone) {
+        this.levelDone = false;
+        this.movedOn = true;
+        this.movedOnText = 'You can move on at any time!'
+      }
       this.regenerateExpression();
       this.userAnswer = '';
       this.answered = false;

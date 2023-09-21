@@ -10,6 +10,12 @@ export class TextComponent implements OnInit {
   @Input()
   levelDone: boolean = false;
 
+  // Initialize the possibility to move on to 'false'
+  movedOn: boolean = false;
+
+  // Initialize the text to be shown when the user is able to move on
+  movedOnText: string = '';
+
   // Declare a list of all the allowed characters
   characters: string = 'ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789';
 
@@ -31,6 +37,10 @@ export class TextComponent implements OnInit {
   // Create a custom level event and bind it to the captcha component
   @Output()
   levelEvent: EventEmitter<string> = new EventEmitter<string>();
+
+  // Create a custom pass event and bind it to the captcha component
+  @Output()
+  passEvent: EventEmitter<string> = new EventEmitter<string>();
 
   // Format the text using canvas
   formatText(text: string) {
@@ -118,13 +128,23 @@ export class TextComponent implements OnInit {
       // Mark that the user has answered correctly
       this.result = true;
       this.resultText = 'Correct! Let\'s move on!';
+
+      if (!this.movedOn) {
+        // Emit the level completion to the captcha component
+        this.passEvent.emit('2');
+      }
     }
   }
 
   emitLevel(event: any) {
     // If the user clicks Try Again button, regenerate the random text
     if (event.target.value === '2') {
-      this.levelDone = false;
+      // If the user has already passed the level, show the move-on text
+      if (this.levelDone) {
+        this.levelDone = false;
+        this.movedOn = true;
+        this.movedOnText = 'You can move on at any time!'
+      }
       this.regenerateCharacters();
       this.userAnswer = '';
       this.answered = false;
