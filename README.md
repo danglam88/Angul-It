@@ -1,27 +1,72 @@
-# Angular-It
+# Angular CAPTCHA Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
+## Table of Contents
 
-## Development server
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contributing](#contributing)
+- [Author](#author)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Description
 
-## Code scaffolding
+This is a multiple-stage CAPTCHA web application developed using Angular. There are totally 3 different types of challenges: MATH, TEXT, and IMAGE.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- MATH: The user is given a simple arithmetic expression and they need to provide a correct result in order to move on.
+- TEXT: The user is given an alphabetical string with some distracted figures and again, they need to find and provide the correct text in order to move on.
+- IMAGE: The user is given a cat image in 36 small pieces organized as a 6x6 matrix. They need to choose ALL the pieces that have some parts of a cat in it.
 
-## Build
+Completing all of the above 3 challenges will prove that the use is indeed a human, not a bot.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+The user is able to start new challenges again after completion.
 
-## Running unit tests
+The user is able to move back to the previous challenge which they already completed. There, they can opt to try the challenge again if they want. Nevertheless, they do NOT have to complete a challenge in order to move on to the next challenge if they already completed that challenge before.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The user progression is always kept track so in case the user opts to refresh the browser, they will always end up wherever they were before the refresh.
 
-## Running end-to-end tests
+## Installation
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Make sure you have NODE JS and Angular CLI installed and configured properly on your machine.
 
-## Further help
+You can download NODE JS [here](https://nodejs.org/en).
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+After downloading and installing NODE JS successfully, run the following command to install Angular CLI:
+
+```bash
+npm install -g @angular/cli@latest
+```
+
+To install the project, clone the following repository to your local machine:
+
+```bash
+git clone https://github.com/danglam88/Angul-It.git
+```
+
+## Usage
+
+Navigate to the root directory of the project, then run the following command:
+
+```bash
+npm install
+```
+
+This will install all the necessary packages and dependencies for the project. After that, run:
+
+```bash
+ng serve
+```
+
+This will start the server at `http://localhost:4200/` and the CAPTCHA application is ready to be used.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+## Contributing
+
+Contributions are welcome. Please open an issue or submit a pull request if you would like to help improving the project.
+
+## Author
+
+- [Danglam](https://github.com/danglam88)
