@@ -17,11 +17,13 @@ This is a multiple-stage CAPTCHA web application developed using Angular. There 
 - TEXT: The user is given an alphabetical string with some distracted figures and again, they need to find and provide the correct text in order to move on.
 - IMAGE: The user is given a cat image in 36 small pieces organized as a 6x6 matrix. They need to choose ALL the pieces that have some parts of a cat in it.
 
-Completing all of the above 3 challenges will prove that the use is indeed a human, not a bot.
+Completing all of the above 3 challenges will verify that the use is indeed a human, not a bot.
 
 The user is able to start new challenges again after completion.
 
 The user is able to move back to the previous challenge which they already completed. There, they can opt to try the challenge again if they want. Nevertheless, they do NOT have to complete a challenge in order to move on to the next challenge if they already completed that challenge before.
+
+The user will NOT be able to move on to the next challenge if they have not completed the previous one. Consequently, the user will NOT be able to access the result stage unless they have already completed all 3 challenges.
 
 The user progression is always kept track so in case the user opts to refresh the browser, they will always end up wherever they were before the refresh.
 
