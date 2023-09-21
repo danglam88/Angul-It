@@ -10,30 +10,30 @@ export class AppComponent {
   title = 'Angular-It';
 
   // Initialize the start to 'false'
-  start: string = 'false';
+  start: boolean = false;
 
   // Initialize the end to 'false'
-  end: string = 'false';
+  end: boolean = false;
 
   // Set the start based on what is emitted from the home component
   setStart(state: string) {
     if (state === 'start') {
-      this.start = 'true';
+      this.start = true;
     }
   }
 
   // Set the start and the end based on what is emitted from the captcha component
   setResult(state: string) {
     if (state === 'result') {
-      this.start = 'false';
-      this.end = 'true';
+      this.start = false;
+      this.end = true;
     }
   }
 
   // Set the end based on what is emitted from the result component
   setRestart(state: string) {
     if (state === 'restart') {
-      this.end = 'false';
+      this.end = false;
     }
   }
 }

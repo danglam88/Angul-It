@@ -1,18 +1,22 @@
 <div class="main-body">
     <h3>Level 3: <span>IMAGE</span></h3>
-    <p>Choose all the pictures that involve cats!</p>
-    <div id="image-container"></div>
-    <button [ngClass]="{'regen': true, 'btn': true, 'btn-regen': !answered, 'btn-disabled': answered}" type="button" [disabled]="answered" (click)="regenerateCatImages()">Regenerate</button>
-    <div class="input-group mb-3 input-answer">
+    <p [ngStyle]="{opacity: levelDone? '0' : '1'}">Choose all the pictures that involve cats!</p>
+    <div [ngStyle]="{opacity: levelDone? '0' : '1'}" id="image-container"></div>
+    <button [ngStyle]="{opacity: levelDone? '0' : '1'}" [ngClass]="{'regen': true, 'btn': true, 'btn-regen': !answered, 'btn-disabled': answered}" type="button" [disabled]="answered" (click)="regenerateCatImages()">Regenerate</button>
+    <div [ngStyle]="{opacity: levelDone? '0' : '1'}" class="input-group mb-3 input-answer">
         <button [ngClass]="{'btn': true, 'btn-submit': userAnswer && !answered, 'btn-disabled': !userAnswer || answered}" type="button" id="button-addon2" [disabled]="!userAnswer || answered" (click)="checkAnswer()">Submit</button>
     </div>
-    <p [ngStyle]="{opacity: answered ? '1' : '0', color: result ? 'green' : 'red'}">{{ resultText }}
-        <span *ngIf="!answered">
+    <p [ngStyle]="{opacity: answered || levelDone ? '1' : '0', color: result || levelDone ? 'green' : 'red'}">{{ resultText }}
+        <span *ngIf="!answered && !levelDone">
             <button type="button" class="btn btn-primary" [style.opacity]="0">Style Holder</button>
         </span>
-        <span *ngIf="answered">
+        <span *ngIf="answered && !levelDone">
             <button type="button" class="btn btn-primary btn-level" value="3" *ngIf="!result" (click)="emitLevel($event)">Try Again</button>
             <button type="button" class="btn btn-primary btn-level" value="result" *ngIf="result" (click)="emitLevel($event)">Verify</button>
+        </span>
+        <span *ngIf="levelDone">
+            <button type="button" class="btn btn-primary btn-level" value="result" (click)="emitLevel($event)">Verify</button>
+            <button type="button" class="btn btn-primary btn-level" value="3" (click)="emitLevel($event)">Try Again, instead</button>
         </span>
     </p>
     <button type="button" class="btn btn-dark" value="2" (click)="emitLevel($event)">Back</button>

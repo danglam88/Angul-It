@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
   selector: 'text',
@@ -6,6 +6,10 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core';
   styleUrls: ['./text.component.css']
 })
 export class TextComponent implements OnInit {
+  // Initialize the completion of the level to 'false'
+  @Input()
+  levelDone: boolean = false;
+
   // Declare a list of all the allowed characters
   characters: string = 'ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789';
 
@@ -79,9 +83,14 @@ export class TextComponent implements OnInit {
     }
   }
 
-  // Format the text when the component is initialized
   ngOnInit() {
-    this.formatText(this.expectedResult);
+    // Check if the level has already been done before
+    if (this.levelDone) {
+      this.resultText = 'You\'ve already passed this level! Let\'s move on!';
+    } else {
+      // Format the text when the component is initialized
+      this.formatText(this.expectedResult);
+    }
   }
 
   // Regenerate a text that contains 6 random characters from the list of allowed characters
@@ -115,13 +124,15 @@ export class TextComponent implements OnInit {
   emitLevel(event: any) {
     // If the user clicks Try Again button, regenerate the random text
     if (event.target.value === '2') {
+      this.levelDone = false;
       this.regenerateCharacters();
       this.userAnswer = '';
       this.answered = false;
       this.result = false;
       this.resultText = 'Wrong! Please try again!';
+    } else {
+      // Emit the level to the captcha component
+      this.levelEvent.emit(event.target.value);
     }
-    // Emit the level to the captcha component
-    this.levelEvent.emit(event.target.value);
   }
 }

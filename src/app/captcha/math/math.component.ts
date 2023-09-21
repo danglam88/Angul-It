@@ -1,11 +1,15 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
   selector: 'math',
   templateUrl: './math.component.html',
   styleUrls: ['./math.component.css']
 })
-export class MathComponent {
+export class MathComponent implements OnInit {
+  // Initialize the completion of the level to 'false'
+  @Input()
+  levelDone: boolean = false;
+
   // Generate 2 random numbers between 1 and 10
   firstNumber: number = Math.floor(Math.random() * 10) + 1;
   secondNumber: number = Math.floor(Math.random() * 10) + 1;
@@ -117,6 +121,13 @@ export class MathComponent {
     return text;
   }
 
+  // Check if the level has already been done before
+  ngOnInit() {
+    if (this.levelDone) {
+      this.resultText = 'You\'ve already passed this level! Let\'s move on!';
+    }
+  }
+
   // Regenerate the arithmetic expression
   regenerateExpression() {
     // Regenerate 2 random numbers between 1 and 10
@@ -149,13 +160,15 @@ export class MathComponent {
   emitLevel(event: any) {
     // If the user clicks Try Again button, regenerate the arithmetic expression
     if (event.target.value === '1') {
+      this.levelDone = false;
       this.regenerateExpression();
       this.userAnswer = '';
       this.answered = false;
       this.result = false;
       this.resultText = 'Wrong! Please try again!';
+    } else {
+      // Emit the level to the captcha component
+      this.levelEvent.emit(event.target.value);
     }
-    // Emit the level to the captcha component
-    this.levelEvent.emit(event.target.value);
   }
 }

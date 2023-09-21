@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 // Define the cell interface as an object with two properties: row and col
 interface cell {
@@ -12,6 +12,10 @@ interface cell {
   styleUrls: ['./image.component.css']
 })
 export class ImageComponent implements OnInit {
+  // Initialize the completion of the level to 'false'
+  @Input()
+  levelDone: boolean = false;
+
   // Initialize the expected result
   expectedResult: cell[] = [];
 
@@ -240,6 +244,7 @@ export class ImageComponent implements OnInit {
         break;
       case 5:
         correctAnswer.push({ row: 0, col: 1 });
+        correctAnswer.push({ row: 0, col: 2 });
         correctAnswer.push({ row: 0, col: 3 });
         correctAnswer.push({ row: 1, col: 1 });
         correctAnswer.push({ row: 1, col: 2 });
@@ -255,6 +260,7 @@ export class ImageComponent implements OnInit {
         correctAnswer.push({ row: 3, col: 3 });
         correctAnswer.push({ row: 3, col: 4 });
         correctAnswer.push({ row: 3, col: 5 });
+        correctAnswer.push({ row: 4, col: 0 });
         correctAnswer.push({ row: 4, col: 1 });
         correctAnswer.push({ row: 4, col: 2 });
         correctAnswer.push({ row: 4, col: 3 });
@@ -331,9 +337,14 @@ export class ImageComponent implements OnInit {
     return correctAnswer;
   }
 
-  // Format the text when the component is initialized
   ngOnInit() {
-    this.regenerateCatImages();
+    // Check if the level has already been done before
+    if (this.levelDone) {
+      this.resultText = 'You\'ve already passed this level! Let\'s now verify!';
+    } else {
+      // Generate a random cat image when the component is initialized
+      this.regenerateCatImages();
+    }
   }
 
   // Regenerate the cat images
@@ -359,13 +370,15 @@ export class ImageComponent implements OnInit {
   emitLevel(event: any) {
     // If the user clicks Try Again button, regenerate the cat images
     if (event.target.value === '3') {
+      this.levelDone = false;
       this.regenerateCatImages();
       this.userAnswer = [];
       this.answered = false;
       this.result = false;
       this.resultText = 'Wrong! Please try again!';
+    } else {
+      // Emit the level to the captcha component
+      this.levelEvent.emit(event.target.value);
     }
-    // Emit the level to the captcha component
-    this.levelEvent.emit(event.target.value);
   }
 }
