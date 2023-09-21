@@ -258,6 +258,7 @@ export class ImageComponent implements OnInit {
         correctAnswer.push({ row: 0, col: 1 });
         correctAnswer.push({ row: 0, col: 2 });
         correctAnswer.push({ row: 0, col: 3 });
+        correctAnswer.push({ row: 0, col: 4 });
         correctAnswer.push({ row: 1, col: 1 });
         correctAnswer.push({ row: 1, col: 2 });
         correctAnswer.push({ row: 1, col: 3 });
