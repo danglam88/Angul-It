@@ -160,7 +160,7 @@ export class MathComponent implements OnInit {
     this.answered = true;
 
     // Check if the user's answer is correct
-    if (this.expectedResult === this.userAnswer) {
+    if (this.expectedResult === this.userAnswer.trim()) {
       // Mark that the user has answered correctly
       this.result = true;
       this.resultText = 'Correct! Let\'s move on!';
